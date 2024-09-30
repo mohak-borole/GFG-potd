@@ -96,21 +96,30 @@ class Solution {
   public:
     // Function to return a list of integers denoting the node
     // values of both the BST in a sorted order.
-    void traverse(Node *root , vector<int> &arr) {
-        if(!root) return ;
+    void node(Node *root,vector<int>&res){
+        if(root==NULL)
+        return ;
+        node(root->left,res);
+        res.push_back(root->data);
+        node(root->right,res);
         
-        arr.push_back(root->data);
-        traverse(root->left , arr);
-        traverse(root->right , arr);
     }
     vector<int> merge(Node *root1, Node *root2) {
         // Your code here
-        vector<int> ans;
+        vector<int>mer;
+        vector<int>res;
+        vector<int>res1;
+        node(root1,res);
+        node(root2,res1);
         
-        traverse(root1 , ans);
-        traverse(root2 , ans);
-        sort(ans.begin() , ans.end());
-        return ans;
+        for(auto it:res){
+            mer.push_back(it);
+        }
+        for(auto it:res1){
+            mer.push_back(it);
+        }
+        sort(mer.begin(),mer.end());
+        return mer;
     }
 };
 
